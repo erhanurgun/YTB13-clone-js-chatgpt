@@ -43,7 +43,7 @@ function chatStripe(isAi, value, uniqueId) {
   return `
         <div class="wrapper ${isAi && "ai"}">
             <div class="chat">
-                <div className="profile">
+                <div class="profile">
                     <img 
                     src="${isAi ? bot : user}" 
                     alt="${isAi ? "bot" : "user"}"
@@ -65,13 +65,38 @@ const handleSubmit = async (e) => {
 
   // bot's chatStripe
   const uniqueId = generateUniqueId();
-  chatContainer.innerHTML += chatStripe(true, "Yükleniyor...", " ", uniqueId);
+  chatContainer.innerHTML += chatStripe(true, " ", uniqueId);
 
   chatContainer.scrollTop = chatContainer.scrollHeight;
 
   const messageDiv = document.getElementById(uniqueId);
 
   loader(messageDiv);
+
+  // fetch data from server -> bot's response
+
+  const response = await fetch("http://localhost:5000", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  clearInterval(loadInterval);
+  messageDiv.innerHTML = "";
+
+  if (response.ok) {
+    const data = await response.json();
+    const parsedData = data.bot.trim();
+
+    textType(messageDiv, parsedData);
+  } else {
+    const err = await response.text();
+
+    messageDiv.innerHTML = "Beklenmedik bir hata oluştu!";
+
+    console.log(err);
+  }
 };
 
 form.addEventListener("submit", handleSubmit);

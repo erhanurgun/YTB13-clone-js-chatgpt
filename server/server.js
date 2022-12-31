@@ -17,7 +17,7 @@ app.use(express.json());
 
 app.get("/", async (req, res) => {
   res.status(200).send({
-    message: "Hello World",
+    message: "API Test Ediliyor...",
   });
 });
 
@@ -25,7 +25,7 @@ app.post("/", async (req, res) => {
   try {
     const prompt = req.body.prompt;
 
-    const response = await openai.complete({
+    const response = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: `${prompt}`,
       temperature: 0,

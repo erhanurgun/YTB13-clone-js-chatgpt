@@ -3,26 +3,22 @@ import user from "./assets/user.svg";
 
 const form = document.querySelector("form");
 const chatContainer = document.querySelector("#chatContainer");
-
 let loadInterval;
 
 function loader(e) {
   e.textContent = "";
-
   loadInterval = setInterval(() => {
     e.textContent += ".";
+    if (e.textContent.length > 3) {
+      e.textContent = "";
+    }
   }, 300);
-
-  if (e.textContent.length > 3) {
-    e.textContent = "";
-  }
 }
 
 function textType(e, text) {
   let index = 0;
-
   let interval = setInterval(() => {
-    if (index > text.length) {
+    if (index < text.length) {
       e.innerHTML += text.charAt(index);
       index++;
     } else {
@@ -45,8 +41,8 @@ function chatStripe(isAi, value, uniqueId) {
             <div class="chat">
                 <div class="profile">
                     <img 
-                    src="${isAi ? bot : user}" 
-                    alt="${isAi ? "bot" : "user"}"
+                    src=${isAi ? bot : user}
+                    alt=${isAi ? "bot" : "user"}
                     />
                 </div>
                 <div class="message" id=${uniqueId}>${value}</div>
@@ -66,20 +62,20 @@ const handleSubmit = async (e) => {
   // bot's chatStripe
   const uniqueId = generateUniqueId();
   chatContainer.innerHTML += chatStripe(true, " ", uniqueId);
-
   chatContainer.scrollTop = chatContainer.scrollHeight;
 
   const messageDiv = document.getElementById(uniqueId);
-
   loader(messageDiv);
 
   // fetch data from server -> bot's response
-
   const response = await fetch("http://localhost:5000", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
+    body: JSON.stringify({ 
+      prompt: data.get("prompt") 
+    }),
   });
 
   clearInterval(loadInterval);
@@ -88,13 +84,10 @@ const handleSubmit = async (e) => {
   if (response.ok) {
     const data = await response.json();
     const parsedData = data.bot.trim();
-
     textType(messageDiv, parsedData);
   } else {
     const err = await response.text();
-
-    messageDiv.innerHTML = "Beklenmedik bir hata oluştu!";
-
+    messageDiv.innerHTML = "Beklenmedik bir hata oluştu!, konsol ekranına bakınız!";
     console.log(err);
   }
 };

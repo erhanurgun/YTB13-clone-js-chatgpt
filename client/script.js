@@ -1,7 +1,7 @@
 import bot from "./assets/bot.svg";
 import user from "./assets/user.svg";
 
-const server = "http://localhost:5000";
+const server = "https://js-chatgpt.onrender.com";
 const form = document.querySelector("form");
 const trash = document.querySelector("#trash");
 const chatContainer = document.querySelector("#chatContainer");

@@ -32,12 +32,12 @@ body {
 }
 
 #chatContainer::-webkit-scrollbar {
-  background: #ffffff36;
+  background: #ffffff33;
   width: 5px;
 }
 
 #chatContainer::-webkit-scrollbar-thumb {
-  background: #fc0e71;
+  background: #066cd3;
   border-radius: 10px;
 }
 
@@ -156,4 +156,9 @@ h1 {
   right: 10px;
   top: 10px;
   display: none;
+}
+
+table tr td {
+  padding: 10px;
+  border: 1px solid #fcfcfc1f;
 }

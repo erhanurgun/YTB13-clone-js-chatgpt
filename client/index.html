@@ -41,7 +41,10 @@
   <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function () {
-        navigator.serviceWorker.register('/sw.js?v=1.0.1');
+        navigator.serviceWorker.register(function () {
+          self.addEventListener("install", (e) => console.log("PWA Yüklendi!"));
+          self.addEventListener("fetch", (event) => {});
+        });
       });
     }
   </script>

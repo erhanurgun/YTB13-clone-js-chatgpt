@@ -92,7 +92,7 @@ const handleSubmit = async (e) => {
     textType(messageDiv, parsedData);
   } else {
     const err = await response.text();
-    messageDiv.innerHTML = `Beklenmedik bir hata oluştu, lütfen <a href="https://beta.openai.com/" target="_blank">OpenAI Destek</a> ekibiyle <b>API</b> hakkında iletişime geçiniz! \n\n<b>Durum Kodu:</b> 429 \n<b>Server:</b> <a href="${server}" target="_blank">${server}</a>`;
+    messageDiv.innerHTML = `Beklenmedik bir hata oluştu, lütfen <a href="https://beta.openai.com/" target="_blank">OpenAI Destek</a> ekibiyle <b>API</b> hakkında iletişime geçiniz! \n\n<b>Durum Kodu:</b> 429 \n<b>Sunucunuz:</b> <a href="${server}" target="_blank">${server}</a>`;
     console.log(err);
   }
 };

@@ -162,3 +162,26 @@ table tr td {
   padding: 10px;
   border: 1px solid #fcfcfc1f;
 }
+
+.install-app-container {
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+  color: #fff;
+  margin: 0 auto;
+  text-align: center;
+  display: none;
+}
+
+#install-app {
+  background-color: #066cd3;
+  color: #fff;
+  padding: 5px;
+  border-radius: 50px;
+  cursor: pointer;
+  width: 150px;
+}
+
+#install-app:hover {
+  background-color: #066cd3cc;
+}

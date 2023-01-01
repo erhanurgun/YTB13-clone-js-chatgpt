@@ -30,10 +30,17 @@ body {
   padding-bottom: 20px;
   scroll-behavior: smooth;
 }
-/* hides scrollbar */
+
 #chatContainer::-webkit-scrollbar {
-  display: none;
+  background: #ffffff36;
+  width: 5px;
 }
+
+#chatContainer::-webkit-scrollbar-thumb {
+  background: #fc0e71;
+  border-radius: 10px;
+}
+
 .wrapper {
   width: 100%;
   padding: 15px;
@@ -110,4 +117,35 @@ button {
 form img {
   width: 30px;
   height: 30px;
+}
+
+a {
+  color: #1286bb;
+  text-decoration: none;
+}
+
+#trash {
+  position: absolute;
+  cursor: pointer;
+  height: 34px;
+  width: 34px;
+  right: 10px;
+  top: 10px;
+  background-color: #fcfcfc;
+  border-radius: 50%;
+  padding: 7px;
+  display: none;
+}
+
+h1 {
+  color: #fff;
+  margin: 7px 0;
+}
+
+.head {
+  width: 100%;
+  background: #292929;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }

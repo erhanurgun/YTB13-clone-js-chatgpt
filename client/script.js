@@ -2,8 +2,10 @@ import bot from "./assets/bot.svg";
 import user from "./assets/user.svg";
 
 const form = document.querySelector("form");
+const trash = document.querySelector("#trash");
 const chatContainer = document.querySelector("#chatContainer");
 let loadInterval;
+let server = "http://localhost:5000";
 
 function loader(e) {
   e.textContent = "";
@@ -36,6 +38,9 @@ function generateUniqueId() {
 }
 
 function chatStripe(isAi, value, uniqueId) {
+  const trash = document.querySelector("#trash");
+  trash.style.display = "inline-block";
+
   return `
         <div class="wrapper ${isAi && "ai"}">
             <div class="chat">
@@ -68,13 +73,13 @@ const handleSubmit = async (e) => {
   loader(messageDiv);
 
   // fetch data from server -> bot's response
-  const response = await fetch("https://js-chatgpt.onrender.com", {
+  const response = await fetch(server, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ 
-      prompt: data.get("prompt") 
+    body: JSON.stringify({
+      prompt: data.get("prompt"),
     }),
   });
 
@@ -87,11 +92,17 @@ const handleSubmit = async (e) => {
     textType(messageDiv, parsedData);
   } else {
     const err = await response.text();
-    messageDiv.innerHTML = "Beklenmedik bir hata oluştu!, konsol ekranına bakınız!";
+    messageDiv.innerHTML = `Beklenmedik bir hata oluştu, lütfen <a href="https://beta.openai.com/" target="_blank">OpenAI Destek</a> ekibiyle <b>API</b> hakkında iletişime geçiniz! \n\n<b>Durum Kodu:</b> 429 \n<b>Server:</b> <a href="${server}" target="_blank">${server}</a>`;
     console.log(err);
   }
 };
 
+const handleTrash = async () => {
+  chatContainer.innerHTML = "";
+  trash.style.display = "none";
+};
+
+trash.addEventListener("click", handleTrash);
 form.addEventListener("submit", handleSubmit);
 form.addEventListener("keyup", (e) => {
   if (e.keyCode === 13 && !e.shiftKey) {

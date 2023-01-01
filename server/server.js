@@ -5,6 +5,8 @@ import { Configuration, OpenAIApi } from "openai";
 
 dotenv.config();
 
+const server = process.env.SERVER_URL;
+const port = process.env.PORT;
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
@@ -16,7 +18,7 @@ app.use(express.json());
 
 app.get("/", async (req, res) => {
   res.status(200).send({
-    message: "API Test Ediliyor...",
+    message: "API test ediliyor...",
   });
 });
 
@@ -44,8 +46,8 @@ app.post("/", async (req, res) => {
   }
 });
 
-app.listen(5000, () => {
+app.listen(port || 5000, () => {
   console.log(
-    `Sunucu 5000 portunda çalışıyor... \nİzle: http://localhost:5000`
+    `Sunucu ${port} portunda çalışıyor... \nURL: ${server}`
   );
 });

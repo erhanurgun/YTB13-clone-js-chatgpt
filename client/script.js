@@ -1,7 +1,7 @@
 import bot from "./assets/bot.svg";
 import user from "./assets/user.svg";
 
-let server = "https://js-chatgpt.onrender.com";
+const server = "http://localhost:5000";
 const form = document.querySelector("form");
 const trash = document.querySelector("#trash");
 const chatContainer = document.querySelector("#chatContainer");
@@ -38,7 +38,6 @@ function generateUniqueId() {
 }
 
 function chatStripe(isAi, value, uniqueId) {
-  const trash = document.querySelector("#trash");
   trash.style.display = "inline-block";
 
   return `
@@ -100,6 +99,7 @@ const handleSubmit = async (e) => {
 const handleTrash = async () => {
   chatContainer.innerHTML = "";
   trash.style.display = "none";
+  clearInterval(loadInterval);
 };
 
 trash.addEventListener("click", handleTrash);
@@ -109,3 +109,9 @@ form.addEventListener("keyup", (e) => {
     handleSubmit(e);
   }
 });
+
+// initial message
+chatContainer.innerHTML += chatStripe(
+  true,
+  "Merhaba, ben <b>OpenAI</b>'nin <b>GPT-3</b> modeliyle çalışan bir <b>chatbot</b>'um. Sizinle sohbet etmek için buradayım!"
+);

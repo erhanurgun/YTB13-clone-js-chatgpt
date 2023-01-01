@@ -29,12 +29,11 @@ app.post("/", async (req, res) => {
     const response = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: `${prompt}`,
-      temperature: 0,
+      temperature: 1,
       max_tokens: 3000,
       top_p: 1,
       frequency_penalty: 0.5,
       presence_penalty: 0,
-      stop: ['"""'],
     });
 
     res.status(200).send({
@@ -51,3 +50,5 @@ app.listen(port || 5000, () => {
     `Sunucu ${port} portunda çalışıyor... \nURL: ${server}`
   );
 });
+
+export default app;

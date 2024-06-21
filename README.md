@@ -1,6 +1,6 @@
 ## JS ve OpenAI GPT-3 API'si Kullanaılarak Mesajlaşma Uygulaması Geliştirilen Proje
 
-- Demo: [https://js-chatgpt.vercel.app](https://js-chatgpt.vercel.app)
+- Demo: [https://js-clone-chatgpt.vercel.app](https://js-clone-chatgpt.vercel.app)
 
 ### Proje Hakkında
 
